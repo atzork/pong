@@ -1,0 +1,65 @@
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    --hue: 200;
+    --saturation: 50;
+    --foreground: hsl(var(--hue), calc(var(--saturation) * 1%), 75%);
+    --bg: hsl(var(--hue), calc(var(--saturation) * 1%), 45%);
+}
+
+body {
+    margin: 0; padding: 0;
+    background-color: var(--bg);
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+}
+
+/* score */
+.score {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin: 20px 0;
+    color: var(--foreground);
+}
+.score_item {
+    flex: 1 1 auto;
+}
+.score_item.left {
+    text-align: right;
+}
+
+/* stick */
+.stick {
+    --top: 50;
+    --height: 16;
+    background-color: var(--foreground);
+    position: absolute;
+    width: 2vw;
+    height: calc(var(--height) * 1vh);
+    top: calc(var(--top) * 1vh);
+}
+.stick.left {
+    left: 1vw;
+}
+.stick.right {
+    right: 1vw;
+}
+
+/* bol */
+.boll {
+    --top: 50;
+    --left: 50;
+    position: absolute;
+    width: min(5vh, 5vw);
+    height: min(5vh, 5vw);
+    top: calc(var(--top) * 1vh);
+    left: calc(var(--left) * 1vw);
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background-color: var(--foreground);
+}
+
