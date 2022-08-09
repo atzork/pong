@@ -41,6 +41,7 @@ body {
     width: 2vw;
     height: calc(var(--height) * 1vh);
     top: calc(var(--top) * 1vh);
+    transition: top 200ms;
 }
 .stick.left {
     left: 1vw;
@@ -61,5 +62,6 @@ body {
     transform: translate(-50%, -50%);
     border-radius: 50%;
     background-color: var(--foreground);
+    transition: top 100ms;
 }
 

@@ -1,6 +1,7 @@
 import Stick from "./models/Stick.js";
 import Boll from "./models/Boll.js";
 import Score from "./models/Score.js";
+import AlienStick from "./models/AleenStick.js";
 
 const userScoreElement = document.getElementById('user-score');
 const alienScoreElement = document.getElementById('alien-score');
@@ -9,12 +10,14 @@ const alienStickElement = document.getElementById('alien-stick');
 const bollElement = document.getElementById('boll');
 
 const stick = new Stick(userStickElement);
-const alienStick = new Stick(alienStickElement);
+const alienStick = new AlienStick(alienStickElement);
 const boll = new Boll(bollElement);
 const userScore = new Score(userScoreElement)
 const alienScore = new Score(alienScoreElement)
 
 let lastFrame;
+
+const COLLISION_OFFSET = 7
 
 update();
 
@@ -34,8 +37,9 @@ function update(frame) {
             boll.reset();
         }
 
-        stick.update(delta)
         boll.update(delta)
+        stick.update(delta)
+        alienStick.update(delta, boll.y)
 
 
         // console.log(delta)
@@ -58,12 +62,11 @@ function checkCollision(stickRect, alienStickRect, bollRect) {
 }
 
 function collisionDetected(rect1, rect2) {
-    console.log(rect1, rect2)
     const collision =
-        rect1.left <= rect2.right &&
-        rect1.right >= rect2.left &&
-        rect1.top <= rect2.bottom &&
-        rect1.bottom >= rect2.top
+        rect1.left - COLLISION_OFFSET <= rect2.right &&
+        rect1.right + COLLISION_OFFSET >= rect2.left &&
+        rect1.top - COLLISION_OFFSET <= rect2.bottom &&
+        rect1.bottom + COLLISION_OFFSET >= rect2.top
     return collision
 }
 

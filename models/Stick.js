@@ -5,22 +5,22 @@ const OFFSET = 2;
 
 export default class Stick {
     get position() {
-        return getYPosition(this.stickElement)
+        return getYPosition(this.element)
     }
     set position(position) {
-        setYPosition(this.stickElement, position)
+        setYPosition(this.element, position)
     }
 
     get height() {
-        return getHeight(this.stickElement)
+        return getHeight(this.element)
     }
 
     get rect() {
-        return getRect(this.stickElement)
+        return getRect(this.element)
     }
 
     constructor(element) {
-        this.stickElement= element;
+        this.element= element;
         this.reset();
     }
 
@@ -47,8 +47,6 @@ export default class Stick {
         if (OFFSET < newPosition && (100 - OFFSET) > newPosition + this.height) {
             this.position = newPosition;
         }
-
-        console.log(this.position, this.height)
     }
 
 }
