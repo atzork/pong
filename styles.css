@@ -45,6 +45,7 @@ body {
     height: calc(var(--height) * 1vh);
     top: calc(var(--top) * 1vh);
     transition: top 200ms;
+    border-radius: .7vw;
 }
 .stick.left {
     left: 1vw;
