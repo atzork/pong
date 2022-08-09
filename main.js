@@ -23,7 +23,7 @@ function update(frame) {
         const delta = 1 /(frame - lastFrame)
         if (checkCollision(stick.rect, alienStick.rect, boll.rect))
         {
-            boll.invertDirection()
+            boll.invertXDirection()
         }
         if (checkUserFault(boll.rect)) {
             userScore.increase();
@@ -58,8 +58,13 @@ function checkCollision(stickRect, alienStickRect, bollRect) {
 }
 
 function collisionDetected(rect1, rect2) {
-    return (rect1.top > rect2.bottom || rect1.bottom < rect2.top) &&
-        (rect1.right <= rect2.left || rect1.left >= rect2.right)
+    console.log(rect1, rect2)
+    const collision =
+        rect1.left <= rect2.right &&
+        rect1.right >= rect2.left &&
+        rect1.top <= rect2.bottom &&
+        rect1.bottom >= rect2.top
+    return collision
 }
 
 document.addEventListener('keydown', (event) => {

@@ -34,14 +34,24 @@ export default class Boll {
         this.velocity = DEFAULT_VELOCITY;
     }
 
-    invertDirection() {
-        this.direction.x *= -1;
+    invertYDirection() {
         this.direction.y *= -1;
     }
+    invertXDirection() {
+        this.direction.x *= -1;
+    }
+
+
 
     update(delta, stickRect) {
-        this.x += this.direction.x * this.velocity// * delta
-        this.y += this.direction.y * this.velocity// * delta
+        const newX = this.x + this.direction.x * this.velocity// * delta
+        const newY = this.y + this.direction.y * this.velocity// * delta
 
+        if (newY <= 0 || newY >= 100) {
+            this.invertYDirection();
+        } else {
+            this.x = newX;
+            this.y = newY
+        }
     }
 }
