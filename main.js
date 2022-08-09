@@ -16,35 +16,34 @@ const userScore = new Score(userScoreElement)
 const alienScore = new Score(alienScoreElement)
 
 let lastFrame;
+let paused = false;
 
-const COLLISION_OFFSET = 7
+const COLLISION_OFFSET = 10
 
 update();
 
 function update(frame) {
-    if (lastFrame) {
-        const delta = 1 /(frame - lastFrame)
-        if (checkCollision(stick.rect, alienStick.rect, boll.rect))
-        {
-            boll.invertXDirection()
-        }
-        if (checkUserFault(boll.rect)) {
-            userScore.increase();
-            boll.reset();
-        }
-        if (checkAlienFault(boll.rect)) {
-            alienScore.increase();
-            boll.reset();
-        }
+    if (!paused) {
+        if (lastFrame) {
+            const delta = 1 / (frame - lastFrame)
+            if (checkCollision(stick.rect, alienStick.rect, boll.rect)) {
+                boll.invertXDirection()
+            }
+            if (checkUserFault(boll.rect)) {
+                userScore.increase();
+                boll.reset();
+            }
+            if (checkAlienFault(boll.rect)) {
+                alienScore.increase();
+                boll.reset();
+            }
 
-        boll.update(delta)
-        stick.update(delta)
-        alienStick.update(delta, boll.y)
-
-
-        // console.log(delta)
+            boll.update(delta)
+            stick.update(delta)
+            alienStick.update(delta, boll.y)
+        }
+        lastFrame = frame;
     }
-    lastFrame = frame;
 
     requestAnimationFrame(update)
 }
@@ -77,6 +76,9 @@ document.addEventListener('keydown', (event) => {
             break;
         case 'ArrowDown':
             stick.moveDown();
+            break;
+        case 'Space':
+            paused = !paused;
             break;
         default:
             break;
