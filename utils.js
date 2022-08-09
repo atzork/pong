@@ -19,6 +19,11 @@ export function getHeight(element) {
         getComputedStyle(element).getPropertyValue('--height')
     )
 }
+export function getSize(element) {
+    return parseFloat(
+        getComputedStyle(element).getPropertyValue('--size')
+    )
+}
 
 export function getRect(element) {
     return element.getBoundingClientRect();

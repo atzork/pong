@@ -1,4 +1,4 @@
-import {getRandom, getRect, getXPosition, getYPosition, setXPosition, setYPosition} from "../utils.js";
+import {getRandom, getRect, getSize, getXPosition, getYPosition, setXPosition, setYPosition} from "../utils.js";
 
 const DEFAULT_VELOCITY = .5
 
@@ -14,6 +14,10 @@ export default class Boll {
     }
     set x(position) {
         setXPosition(this.bollElement, position)
+    }
+
+    get size() {
+        return getSize(this.bollElement)
     }
 
     get rect() {
@@ -41,16 +45,14 @@ export default class Boll {
         this.direction.x *= -1;
     }
 
-
-
     update(delta, stickRect) {
         const newX = this.x + this.direction.x * this.velocity// * delta
         const newY = this.y + this.direction.y * this.velocity// * delta
 
-        if (newY <= 0 || newY >= 100) {
+        if (newY <= this.size / 2 || newY >= 100 - this.size / 2) {
             this.invertYDirection();
         } else {
-            this.x = newX;
+            this.x = newX
             this.y = newY
         }
     }
